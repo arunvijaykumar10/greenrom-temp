@@ -41,13 +41,13 @@ const RegistrationFormContent = ({ activeStep, isUserVerfied, setIsUserVerified,
       setIsSubmitting(true);
       const formValues = methods.getValues();
 
-      await signUp({
-        username: formValues.email,
-        password: formValues.password,
-        firstName: formValues.firstName,
-        lastName: formValues.lastName,
-        middleName: formValues.middleName || '',
-      });
+      // await signUp({
+      //   username: formValues.email,
+      //   password: formValues.password,
+      //   firstName: formValues.firstName,
+      //   lastName: formValues.lastName,
+      //   middleName: formValues.middleName || '',
+      // });
 
       setIsUserVerified(true);
     } catch (error) {
@@ -62,7 +62,7 @@ const RegistrationFormContent = ({ activeStep, isUserVerfied, setIsUserVerified,
     try {
       setIsSubmitting(true);
       const formValues = methods.getValues();
-      await confirmSignUp({ username: formValues.email, confirmationCode: formValues.code });
+      // await confirmSignUp({ username: formValues.email, confirmationCode: formValues.code });
       setIsOtpVerified(true);
     } catch (error) {
       console.error('Error signing up user:', error);
