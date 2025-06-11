@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 
-import { Stack, Button } from '@mui/material';
+import { Stack, Button, Typography, Box } from '@mui/material';
 
 import { Form } from 'src/components/hook-form';
 import { Scrollbar } from 'src/components/scrollbar';
@@ -49,10 +49,10 @@ export const RegistrationForm = ({ activeStep, onBack, onSubmit }: FormProps) =>
               Back
             </Button>
             <Button variant="contained" type="submit"
-              onClick={onValid}
-              disabled={activeStep === StepIndex.UserInfo && (!isUserVerified || !isOtpVerified)}
+              disabled={(activeStep === StepIndex.UserInfo && (!isUserVerified || !isOtpVerified)) || 
+                       (activeStep === StepIndex.Summary && !methods.watch('terms_accepted'))}
             >
-              {activeStep === StepIndex.Payroll ? 'Submit' : 'Next'}
+              {activeStep === StepIndex.Summary ? 'Submit' : 'Next'}
             </Button>
           </Stack>
         </Stack>

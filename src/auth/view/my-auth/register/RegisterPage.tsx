@@ -3,7 +3,7 @@
 import _ from 'lodash';
 import { useState, useCallback } from 'react';
 
-import { Box, Step, Card, Stack, Stepper, StepLabel, Typography, CardContent } from '@mui/material';
+import { Box, Step, Card, Stack, Stepper, StepLabel, Typography, CardContent, Checkbox, FormControlLabel } from '@mui/material';
 
 import { useRouter } from 'src/routes/hooks';
 
@@ -14,7 +14,7 @@ import RegistrationForm from './RegistrationForm';
 
 import type { PayrollDetails, UserInformation, CompanyInformation, RegistrationFormData } from './types';
 
-const REGISTRATION_STEPS = ['Company Information', 'User Details', 'Payroll Details'];
+const REGISTRATION_STEPS = ['Company Information', 'User Details', 'Payroll Details', 'Review & Submit'];
 
 export default function RegisterPage() {
   const [currentStep, setCurrentStep] = useState<StepIndex>(StepIndex.CompanyInfo);
@@ -23,7 +23,7 @@ export default function RegisterPage() {
   const router = useRouter();
 
   const goToNextStep = () =>
-    setCurrentStep((prevStep) => Math.min(prevStep + 1, StepIndex.Payroll));
+    setCurrentStep((prevStep) => Math.min(prevStep + 1, StepIndex.Summary));
 
   const goToPreviousStep = () =>
     setCurrentStep((prevStep) => Math.max(prevStep - 1, StepIndex.CompanyInfo));
@@ -43,9 +43,18 @@ export default function RegisterPage() {
 
         case StepIndex.Payroll:
           if (formData.companyInfo && formData.userInfo) {
-          // need to write final registration logic here
-          setFormData((prev) => ({ ...prev, payrollInfo: stepData as PayrollDetails }));
-              goToNextStep();
+            setFormData((prev) => ({ ...prev, payrollInfo: stepData as PayrollDetails }));
+            goToNextStep();
+          }
+          break;
+          
+        case StepIndex.Summary:
+          // Final submission logic
+          if (formData.companyInfo && formData.userInfo && formData.payrollInfo) {
+            // Submit the complete registration data
+            toast.success('Registration submitted successfully!');
+            // Redirect to login or dashboard
+            router.push('/auth/login');
           }
           break;
 
