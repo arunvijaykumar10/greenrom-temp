@@ -52,7 +52,7 @@ export const RegistrationForm = ({ activeStep, onBack, onSubmit }: FormProps) =>
               onClick={onValid}
               disabled={activeStep === StepIndex.UserInfo && (!isUserVerified || !isOtpVerified)}
             >
-              Next
+              {activeStep === StepIndex.Payroll ? 'Submit' : 'Next'}
             </Button>
           </Stack>
         </Stack>
