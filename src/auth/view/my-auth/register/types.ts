@@ -3,6 +3,7 @@ export enum StepIndex {
   CompanyInfo,
   UserInfo,
   Payroll,
+  Summary,
 }
 
 export interface RegistrationFormData {
