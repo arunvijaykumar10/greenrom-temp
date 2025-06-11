@@ -49,7 +49,8 @@ export const RegistrationForm = ({ activeStep, onBack, onSubmit }: FormProps) =>
               Back
             </Button>
             <Button variant="contained" type="submit"
-              disabled={activeStep === StepIndex.UserInfo && (!isUserVerified || !isOtpVerified)}
+              disabled={(activeStep === StepIndex.UserInfo && (!isUserVerified || !isOtpVerified)) || 
+                       (activeStep === StepIndex.Summary && !methods.watch('terms_accepted'))}
             >
               {activeStep === StepIndex.Summary ? 'Submit' : 'Next'}
             </Button>
